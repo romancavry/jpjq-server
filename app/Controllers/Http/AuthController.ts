@@ -10,10 +10,16 @@ export default class AuthController {
       username: schema.string({ trim: true }, [
         rules.unique({ table: 'users', column: 'username', caseInsensitive: true }),
       ]),
-      password: schema.string({}, [rules.minLength(5)]),
+      password: schema.string({}, [rules.minLength(1)]),
     })
 
-    const data = await request.validate({ schema: userSchema })
+    const data = await request.validate({
+      schema: userSchema,
+      messages: {
+        'required': 'Поле {{ field }} обязательно для заполнения',
+        'username.unique': 'Имя пользователя должно быть уникально',
+      },
+    })
     const user = await User.create(data)
 
     await auth.login(user)
@@ -23,9 +29,6 @@ export default class AuthController {
 
   public async login({ request, auth, response }: HttpContextContract) {
     const { username, password } = request.only(['username', 'password'])
-
-    // const email = request.input('email')
-    // const password = request.input('password')
 
     const user = await User.query().where('username', username).firstOrFail()
 
