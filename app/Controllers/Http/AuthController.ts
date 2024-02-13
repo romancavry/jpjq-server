@@ -29,7 +29,7 @@ export default class AuthController {
     return response.send(user)
   }
 
-  public async login({ request, auth }: HttpContextContract) {
+  public async login({ request, auth, response }: HttpContextContract) {
     const { username, password } = request.only(['username', 'password'])
 
     const user = await User.query().where('username', username).first()
@@ -40,6 +40,7 @@ export default class AuthController {
     }
 
     await auth.use('web').login(user, true)
+    return response.send(user)
   }
 
   public async logout({ auth, response }: HttpContextContract) {
