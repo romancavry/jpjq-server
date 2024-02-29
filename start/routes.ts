@@ -24,8 +24,8 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/currencies', 'CoinMarketController.getCurrencies')
-Route.get('/currency-info', 'CoinMarketController.getCurrencyInfo')
+Route.get('/currencies', 'AccountingController.getCurrencies')
+Route.get('/currency-info', 'AccountingController.getCurrencyInfo')
 
 Route.group(() => {
   Route.post('/register', 'AuthController.register')

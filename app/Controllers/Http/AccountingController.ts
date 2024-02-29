@@ -7,7 +7,7 @@ import CurrenciesStore from '@ioc:App/Modules/currencies/store'
 
 import { ERROR_CODES } from 'App/Utils/errorUtils'
 
-export default class CoinMarketController {
+export default class AccountingController {
   public async getAllCurrencies() {
     const currenciesInfo = await CoinMarketClient.getCurrenciesInfo()
 

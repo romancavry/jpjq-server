@@ -8,11 +8,9 @@ import humps from 'humps'
 
 import type ServiceConfig from 'App/Services/Client/Shared/ServiceConfig'
 
-import { Currency } from 'App/Modules/currencies'
-
 import endpoints from '../Shared/endpoints'
 
-export default class CoinMarketClient {
+export default class CashMarketClient {
   private readonly baseUrl: string
   private readonly connectTimeout: number
   private readonly timeout: number
@@ -41,20 +39,31 @@ export default class CoinMarketClient {
     })
   }
 
-  public async getCurrenciesInfo() {
+  public async getHistorical({ date }: { date: string }) {
     try {
-      const response = await this.client.get(endpoints.v1_currencies, {
+      const response = await this.client.get(endpoints.v1_historical, {
         params: {
-          [Env.get('COIN_MARKET_API_KEY_PARAM')]: Env.get('COIN_MARKET_API_KEY'),
+          [Env.get('CASH_MARKET_API_KEY_PARAM')]: Env.get('CASH_MARKET_API_KEY'),
+          date,
         },
       })
 
       return humps.camelizeKeys(response.data) as Promise<{
-        data: Currency[]
-        meta: { count: number }
+        /**
+         * {
+         *  date: {
+         *     "2024-02-28": {
+         *        "RUB": 91.3951307443,
+         *        "EUR": 0.9227801203,
+         *        "USD": 1
+         *      }
+         *   }
+         * }
+         */
+        data: Record<string, Record<string, number>>
       }>
     } catch (err) {
-      console.log('Coin market getCurrenciesInfo error: ', err)
+      console.log('Cash market getHistorical error: ', err)
       return null
     }
   }

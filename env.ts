@@ -37,4 +37,9 @@ export default Env.rules({
   COIN_MARKET_API_KEY: Env.schema.string(),
   COIN_MARKET_API_KEY_PARAM: Env.schema.string(),
   COIN_MARKET_SSL_VERIFY: Env.schema.boolean.optional(),
+
+  CASH_MARKET_BASE_URL: Env.schema.string(),
+  CASH_MARKET_API_KEY: Env.schema.string(),
+  CASH_MARKET_API_KEY_PARAM: Env.schema.string(),
+  CASH_MARKET_SSL_VERIFY: Env.schema.boolean.optional(),
 })
