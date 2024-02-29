@@ -6,7 +6,7 @@ import UnAuthorized from 'App/Exceptions/UnAuthorizedException'
 
 import User from 'App/Models/User'
 
-import { ERROR_CODES } from 'App/utils/errorUtils'
+import { ERROR_CODES } from 'App/Utils/errorUtils'
 
 export default class AuthController {
   public async register({ request, auth, response }: HttpContextContract) {

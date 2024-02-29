@@ -8,11 +8,11 @@ import humps from 'humps'
 
 import type ServiceConfig from 'App/Services/Client/Shared/ServiceConfig'
 
-import { Currency } from 'App/modules/currencies'
+import { Currency } from 'App/Modules/currencies'
 
 import endpoints from '../Shared/endpoints'
 
-export default class AnalyticsClient {
+export default class CoinMarketClient {
   private readonly baseUrl: string
   private readonly connectTimeout: number
   private readonly timeout: number
@@ -55,6 +55,7 @@ export default class AnalyticsClient {
       }>
     } catch (err) {
       console.log('v1/currencies error: ', err)
+      return null
     }
   }
 }

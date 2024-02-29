@@ -25,6 +25,7 @@ Route.get('/', async () => {
 })
 
 Route.get('/currencies', 'CoinMarketController.getCurrencies')
+Route.get('/currency-info', 'CoinMarketController.getCurrencyInfo')
 
 Route.group(() => {
   Route.post('/register', 'AuthController.register')
@@ -33,3 +34,4 @@ Route.group(() => {
 
   Route.get('/user', 'UserController.getUser')
 }).prefix('auth')
+// .middleware('auth:web')

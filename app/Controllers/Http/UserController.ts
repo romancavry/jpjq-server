@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import UnAuthorized from 'App/Exceptions/UnAuthorizedException'
 
-import { ERROR_CODES } from 'App/utils/errorUtils'
+import { ERROR_CODES } from 'App/Utils/errorUtils'
 
 export default class UserController {
   public async getUser({ auth, response }: HttpContextContract) {
