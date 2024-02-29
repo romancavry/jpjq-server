@@ -31,4 +31,10 @@ export default Env.rules({
   PG_USER: Env.schema.string(),
   PG_PASSWORD: Env.schema.string.optional(),
   PG_DB_NAME: Env.schema.string(),
+
+  // Coint market cap
+  COIN_MARKET_BASE_URL: Env.schema.string(),
+  COIN_MARKET_API_KEY: Env.schema.string(),
+  COIN_MARKET_API_KEY_PARAM: Env.schema.string(),
+  COIN_MARKET_SSL_VERIFY: Env.schema.boolean.optional(),
 })

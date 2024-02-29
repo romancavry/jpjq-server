@@ -6,6 +6,8 @@ import UnAuthorized from 'App/Exceptions/UnAuthorizedException'
 
 import User from 'App/Models/User'
 
+import { ERROR_CODES } from 'App/utils/errorUtils'
+
 export default class AuthController {
   public async register({ request, auth, response }: HttpContextContract) {
     const userSchema = schema.create({
@@ -36,7 +38,7 @@ export default class AuthController {
 
     // Ensure user && verify password
     if (!user || !(await Hash.verify(user.password, password))) {
-      throw new UnAuthorized('Invalid credentials', 400, 'INVALID_CREDENTIALS')
+      throw new UnAuthorized('Invalid credentials', 400, ERROR_CODES.INVALID_CREDENTIALS)
     }
 
     await auth.use('web').login(user, true)

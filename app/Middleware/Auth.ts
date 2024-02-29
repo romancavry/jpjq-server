@@ -2,6 +2,8 @@ import { AuthenticationException } from '@adonisjs/auth/build/standalone'
 import type { GuardsList } from '@ioc:Adonis/Addons/Auth'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import { ERROR_CODES } from 'App/utils/errorUtils'
+
 /**
  * Auth middleware is meant to restrict un-authenticated access to a given route
  * or a group of routes.
@@ -51,7 +53,7 @@ export default class AuthMiddleware {
      */
     throw new AuthenticationException(
       'Unauthorized access',
-      'E_UNAUTHORIZED_ACCESS',
+      ERROR_CODES.E_UNAUTHORIZED_ACCESS,
       guardLastAttempted,
       this.redirectTo
     )
