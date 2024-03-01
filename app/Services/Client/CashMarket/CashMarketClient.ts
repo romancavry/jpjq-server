@@ -1,10 +1,8 @@
-import Env from '@ioc:Adonis/Core/Env'
-
+import axios, { type AxiosInstance } from 'axios'
 import * as https from 'https'
 import * as http from 'http'
 
-import axios, { type AxiosInstance } from 'axios'
-import humps from 'humps'
+import Env from '@ioc:Adonis/Core/Env'
 
 import type ServiceConfig from 'App/Services/Client/Shared/ServiceConfig'
 
@@ -48,7 +46,7 @@ export default class CashMarketClient {
         },
       })
 
-      return humps.camelizeKeys(response.data) as Promise<{
+      return response.data as Promise<{
         /**
          * {
          *  date: {

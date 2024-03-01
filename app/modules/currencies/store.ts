@@ -15,7 +15,11 @@ export default class CurrenciesStore {
     return this.currencies.get(slug)
   }
 
-  public getSize() {
-    return this.currencies.size
+  public getCollection() {
+    return this.currencies
+  }
+
+  public empty() {
+    return !this.currencies.size
   }
 }

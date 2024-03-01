@@ -24,8 +24,16 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/currencies', 'AccountingController.getCurrencies')
-Route.get('/currency-info', 'AccountingController.getCurrencyInfo')
+Route.group(() => {
+  // Создание транзакции
+  Route.post('/accounting/create', 'AccountingController.createTransaction')
+
+  // Получение информации о конкретной валюте по ее slug
+  Route.get('/crypto/currencies', 'CryptoController.getCurrenciesCollection')
+
+  // Получение всей коллекции валюты
+  Route.get('/crypto/currency', 'CryptoController.getCurrencyInfo')
+}).middleware('auth:web')
 
 Route.group(() => {
   Route.post('/register', 'AuthController.register')
@@ -34,4 +42,3 @@ Route.group(() => {
 
   Route.get('/user', 'UserController.getUser')
 }).prefix('auth')
-// .middleware('auth:web')
