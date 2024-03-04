@@ -11,6 +11,9 @@ import Transaction from 'App/Models/Transaction'
 import { ERROR_CODES } from 'App/Utils/errorUtils'
 
 export default class AccountingController {
+  /**
+   * Создание транзакции
+   */
   public async createTransaction({ auth, request, response }: HttpContextContract) {
     try {
       const { slug, amount, buyPriceRub, buyDate } = await request.validate({
@@ -58,7 +61,26 @@ export default class AccountingController {
       console.log(err)
 
       throw new Exception(
-        err.message || 'Accounting controller error',
+        err.message || 'Accounting controller createTransaction error',
+        500,
+        ERROR_CODES.CREATE_TRANSACTIONS_UNWISHED_ERROR
+      )
+    }
+  }
+
+  /**
+   * Получение транзакций
+   */
+  public async getTransactions({ auth, response }: HttpContextContract) {
+    try {
+      const transactions = await Transaction.query().where('user_id', auth.user?.id!)
+
+      return response.json({ data: transactions })
+    } catch (err) {
+      console.log(err)
+
+      throw new Exception(
+        err.message || 'Accounting controller getTransactions error',
         500,
         ERROR_CODES.CREATE_TRANSACTIONS_UNWISHED_ERROR
       )

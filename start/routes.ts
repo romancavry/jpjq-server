@@ -28,6 +28,9 @@ Route.group(() => {
   // Создание транзакции
   Route.post('/accounting/create', 'AccountingController.createTransaction')
 
+  // Получение транзакций
+  Route.get('/accounting', 'AccountingController.getTransactions')
+
   // Получение информации о конкретной валюте по ее slug
   Route.get('/crypto/currencies', 'CryptoController.getCurrenciesCollection')
 
